@@ -6,12 +6,13 @@ module.exports = {
                 maxLength: 24,
                 required: true
             },
-            deal_detail: {
-                type: "string",
-                maxLength: 24,
-                required: true
+            sku: {
+                quantity: {
+                    type: 'int',
+                    required: true
+                }
             },
-            date_info: {
+            data_info: {
                 type: {
                     type: "string",
                     required: true
@@ -25,21 +26,15 @@ module.exports = {
                     required: true
                 }
             },
-            sku: {
-                quantity: {
-                    type: "int",
-                    required: true
-                }
-            },
             base_info: {
                 logo_url: {
-                    type: "string",
+                    type: "url",
                     maxLength: 128,
                     required: true
                 },
                 code_type: {
                     type: "string",
-                    maxLength: 16,
+                    maxLength: 32,
                     required: true
                 },
                 brand_name: {
@@ -73,16 +68,13 @@ module.exports = {
                     required: true
                 },
                 fixed_term: {
-                    type: "int",
-                    required: true
+                    type: "int"
                 },
                 fixed_begin_term: {
-                    type: "int",
-                    required: true
+                    type: "int"
                 },
                 end_timestamp: {
-                    type: "int",
-                    required: true
+                    type: "int"
                 },
                 use_custom_code: {
                     type: 'boolean'
@@ -146,6 +138,43 @@ module.exports = {
                 },
                 can_give_friend: {
                     type: 'boolean'
+                }
+            },
+            groupon: {
+                deal_detail: {
+                    type: 'string',
+                    maxLength: 24,
+                    required: true
+                }
+            },
+            cash: {
+                least_cost: {
+                    type: 'int',
+                    required: true
+                },
+                reduce_cost: {
+                    type: 'int',
+                    required: true
+                }
+            },
+            discount: {
+                discount: {
+                    type: 'int',
+                    required: true
+                }
+            },
+            gift: {
+                gift: {
+                    type: 'string',
+                    maxLength: 3072,
+                    required: true
+                }
+            },
+            general_coupon: {
+                default_detail: {
+                    type: 'string',
+                    maxLength: 3072,
+                    required: true
                 }
             }
         }
