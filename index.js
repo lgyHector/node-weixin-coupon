@@ -7,21 +7,100 @@ var v = require('node-form-validator');
 var baseUrl = 'https://api.weixin.qq.com/card/'
 var uploadUrl = 'https://api.weixin.qq.com/cgi-bin/media/'
 
+//FIXME: 暂时不依赖settings模块
 module.exports = {
     coupon: {
         create: function(app, data, cb){
-            //TODO: 暂时不依赖settings模块
             var url = baseUrl + 'create' + '?' + util.toParam({
                     access_token: app.auth.accessToken
                 })
             request.json(url, {card: data}, cb)
         },
-        uplogo: function(app, path, cb){
+        upload_logo: function(app, path, cb){
             var url = uploadUrl + 'uploadimg' + '?' +util.toParam({
                     access_token: app.auth.accessToken
                 })
             request.file(url, path, cb);
         },
+        landing_page: function(app, data, cb){
+            var url = baseUrl + 'landingpage/create' + '?' + util.toParam({
+                    access_token: app.auth.accessToken
+                })
+            var error = {}
+            if(!v.validate(data, validation.coupon.landing.create, error)){
+                throw new Error(JSON.stringify(error))
+                return;
+            }
+            request.json(url, data, cb)
+        },
+        qrcode: function(app, data, cb){
+            var url = baseUrl + 'qrcode/create' + '?' + util.toParam({
+                    access_token: app.auth.accessToken
+                })
+            request.json(url, data, cb)
+        },
+        query: function(app, card_id, code, cb){
+            var url = baseUrl + 'code/get' + '?' + util.toParam({
+                    access_token: app.auth.accessToken
+                })
+            request.json(url, {
+                card_id: card_id,
+                code: code,
+                check_consume: true
+            }, cb)
+        },
+        consume: function(app, card_id, code, cb){
+            var url = baseUrl + 'code/consume' + '?' + util.toParam({
+                    access_token: app.auth.accessToken
+                })
+            request.json(url, {
+                card_id: card_id,
+                code: code
+            }, cb)
+        },
+        decrypt: function(app, encrypt_code, cb){
+            var url = baseUrl + 'code/decrypt' + '?' + util.toParam({
+                    access_token: app.auth.accessToken
+                })
+            request.json(url, {encrypt_code: encrypt_code}, cb)
+        },
+        user_getcard_list: function(){
+
+        },
+        get: function(){
+            //TODO: 需实现
+        },
+        batch_get: function(){
+
+        },
+        update: function(){
+            //TODO: 需实现
+        },
+        paycell: function(){
+
+        },
+        modify_stock: function(){
+
+        },
+        code_update: function(){
+
+        },
+        remove: function(){
+            //TODO: 需实现
+        },
+        unavailable: function(){
+            //TODO: 需实现
+        },
+        get_card_bizuin_info: function(){
+
+        },
+        get_card_cardinfo: function(){
+
+        },
+        get_cardmember_cardinfo: function(){
+
+        },
+
         color: {
             "Color010": "Color010",
             "Color020": "Color020",
@@ -56,6 +135,15 @@ module.exports = {
         date_type: {
             "DATE_TYPE_FIX_TERM": "DATE_TYPE_FIX_TERM",// 固定时长
             "DATE_TYPE_FIX_TIME_RANGE": "DATE_TYPE_FIX_TIME_RANGE" //固定日期区间
+        },
+        landing_scene: {
+            "SCENE_NEAR_BY": "SCENE_NEAR_BY", // 附近
+            "SCENE_MENU": "SCENE_MENU", // 自定义菜单
+            "SCENE_QRCODE": "SCENE_QRCODE",// 二维码
+            "SCENE_ARTICLE": "SCENE_ARTICLE",// 公众号文章
+            "SCENE_H5": "SCENE_H5", //H5页面
+            "SCENE_IVR": "SCENE_IVR", // 自动回复
+            "SCENE_CARD_CUSTOM_CELL": "SCENE_CARD_CUSTOM_CELL" // 卡券自定义cell
         }
     },
     validate:  function(coupon_info, coupon_type){
@@ -145,5 +233,39 @@ module.exports = {
                     return coupon
                 }
             }
+    },
+    build_qrcode: function(qrcode_info){
+        var qrcode = {
+            action_name: 'QR_CARD'
+        }
+        if(qrcode_info instanceof Array){
+            qrcode.action_name = 'QR_MULTIPLE_CARD'
+            qrcode.action_info = {
+                multiple_card: {
+                    card_list: qrcode_info
+                }
+            }
+        }else{
+            qrcode.action_info = {
+                card: {
+                    code: qrcode_info.code,
+                    is_unique_code: qrcode_info.is_unique_code || false
+                }
+            }
+            if(qrcode_info.expire_seconds)
+                qrcode.action_info.card.expire_seconds = qrcode_info.expire_seconds
+            if(qrcode_info.card_id)
+                qrcode.action_info.card.card_id = qrcode_info.card_id
+            if(qrcode_info.openid)
+                qrcode.action_info.card.openid = qrcode_info.openid
+            if(qrcode_info.outer_id)
+                qrcode.action_info.card.outer_id = qrcode_info.outer_id
+            var error = {}
+            if(!v.validate(qrcode.action_info.card, validation.coupon.qrcode.create, error)){
+                throw new Error(JSON.stringify(error));
+                return;
+            }
+        }
+        return qrcode;
     }
 }

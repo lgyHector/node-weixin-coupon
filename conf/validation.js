@@ -177,6 +177,63 @@ module.exports = {
                     required: true
                 }
             }
+        },
+        landing: {
+            create: {
+                banner: {
+                    type: "string",
+                    required: true
+                },
+                page_title: {
+                    type: "string",
+                    required: true
+                },
+                can_share: {
+                    required: true
+                },
+                scene: {
+                    type: "string",
+                    maxLength: 128,
+                    required: true
+                },
+                card_list: {
+                    required: true
+                }
+            },
+            card: {
+                cardid: {
+                    type: "string",
+                    required: true
+                },
+                thumb_url: {
+                    type: "url",
+                    required: true
+                }
+            }
+
+        },
+        qrcode: {
+            create: {
+                code: {
+                    type: "string",
+                    maxLength: 128,
+                    required: true
+                },
+                card_id: {
+                    type: "string",
+                    maxLength: 128
+                },
+                openid: {
+                    type: "string",
+                    maxLength: 128
+                },
+                expire_seconds: {
+                    type: "int"
+                },
+                outer_id: {
+                    type: "int"
+                }
+            }
         }
     },
     logo: {
