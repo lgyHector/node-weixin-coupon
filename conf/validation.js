@@ -234,6 +234,86 @@ module.exports = {
                     type: "int"
                 }
             }
+        },
+        update: {
+            base_info: {
+                logo_url: {
+                    type: "url",
+                    maxLength: 128,
+                    required: true
+                },
+                notice: {
+                    type: "string",
+                    maxLength: 48,
+                    required: true
+                },
+                description: {
+                    type: "string",
+                    maxLength: 3072,
+                    required: true
+                },
+                service_phone: {
+                    type: "string",
+                    maxLength: 24
+                },
+                color: {
+                    type: "string",
+                    maxLength: 3072,
+                    required: true
+                },
+                location_id_list: {
+                    type: "array"
+                },
+                center_title: {
+                    type: "string",
+                    maxLength: 18
+                },
+                center_sub_title: {
+                    type: "string",
+                    maxLength: 24
+                },
+                center_url: {
+                    type: "string",
+                    maxLength: 128
+                },
+                custom_url_name: {
+                    type: "string",
+                    maxLength: 16
+                },
+                custom_url: {
+                    type: "string",
+                    maxLength: 128
+                },
+                custom_url_sub_title: {
+                    type: "string",
+                    maxLength: 18
+                },
+                promotion_url_name: {
+                    type: "string",
+                    maxLength: 16
+                },
+                promotion_url: {
+                    type: "string",
+                    maxLength: 128
+                },
+                promotion_url_sub_title: {
+                    type: 'string',
+                    maxLength: 18
+                },
+                code_type: {
+                    type: 'string',
+                    maxLength: 16
+                },
+                get_limit: {
+                    type: 'int'
+                },
+                can_share: {
+                    type: 'boolean'
+                },
+                can_give_friend: {
+                    type: 'boolean'
+                }
+            }
         }
     },
     logo: {

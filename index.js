@@ -10,11 +10,29 @@ var uploadUrl = 'https://api.weixin.qq.com/cgi-bin/media/'
 //FIXME: 暂时不依赖settings模块
 module.exports = {
     coupon: {
+        get: function(app, card_id, cb){
+            var url = baseUrl + 'get' + '?' + util.toParam({
+                    access_token: app.auth.accessToken
+                })
+            request.json(url, {card_id: card_id}, cb)
+        },
+        remove: function(app, card_id, cb){
+            var url = baseUrl + 'delete' + '?' + util.toParam({
+                    access_token: app.auth.accessToken
+                })
+            request.json(url, {card_id: card_id}, cb)
+        },
         create: function(app, data, cb){
             var url = baseUrl + 'create' + '?' + util.toParam({
                     access_token: app.auth.accessToken
                 })
             request.json(url, {card: data}, cb)
+        },
+        update: function(app, data, cb){
+            var url = baseUrl + 'update' + '?' + util.toParam({
+                    access_token: app.auth.accessToken
+                })
+            request.json(url, data, cb)
         },
         upload_logo: function(app, path, cb){
             var url = uploadUrl + 'uploadimg' + '?' +util.toParam({
@@ -53,10 +71,11 @@ module.exports = {
             var url = baseUrl + 'code/consume' + '?' + util.toParam({
                     access_token: app.auth.accessToken
                 })
-            request.json(url, {
-                card_id: card_id,
+            var data = {
                 code: code
-            }, cb)
+            }
+            if(card_id) data.card_id = card_id
+            request.json(url, data, cb);
         },
         decrypt: function(app, encrypt_code, cb){
             var url = baseUrl + 'code/decrypt' + '?' + util.toParam({
@@ -64,32 +83,41 @@ module.exports = {
                 })
             request.json(url, {encrypt_code: encrypt_code}, cb)
         },
-        user_getcard_list: function(){
-
-        },
-        get: function(){
-            //TODO: 需实现
+        user_getcard_list: function(app, openid, card_id, cb){
+            var url = baseUrl + 'user/getcardlist' + '?' + util.toParam({
+                    access_token: app.auth.accessToken
+                })
+            var data = { openid: openid }
+            if(card_id) data.card_id = card_id
+            request.json(url, data, cb);
         },
         batch_get: function(){
 
         },
-        update: function(){
-            //TODO: 需实现
-        },
         paycell: function(){
 
         },
-        modify_stock: function(){
-
+        modify_stock: function(app, card_id, value, cb){
+            var url = baseUrl + 'modifystock' + '?' + util.toParam({
+                    access_token: app.auth.accessToken
+                })
+            var data = { card_id: card_id }
+            value >=0 ? data.increase_stock_value = value
+                : data.reduce_stock_value = Math.abs(value)
+            request.json(url, data, cb)
         },
         code_update: function(){
 
         },
-        remove: function(){
-            //TODO: 需实现
-        },
-        unavailable: function(){
-            //TODO: 需实现
+        unavailable: function(app, card_id, code, cb){
+            var url = baseUrl + 'code/unavailable' + '?' + util.toParam({
+                    access_token: app.auth.accessToken
+                })
+            var data = {
+                code: code
+            }
+            if(card_id) data.card_id = card_id
+            request.json(url, data, cb)
         },
         get_card_bizuin_info: function(){
 
@@ -238,6 +266,8 @@ module.exports = {
         var qrcode = {
             action_name: 'QR_CARD'
         }
+        if(qrcode_info.expire_seconds)
+            qrcode.expire_seconds = qrcode_info.expire_seconds
         if(qrcode_info instanceof Array){
             qrcode.action_name = 'QR_MULTIPLE_CARD'
             qrcode.action_info = {
@@ -252,8 +282,6 @@ module.exports = {
                     is_unique_code: qrcode_info.is_unique_code || false
                 }
             }
-            if(qrcode_info.expire_seconds)
-                qrcode.action_info.card.expire_seconds = qrcode_info.expire_seconds
             if(qrcode_info.card_id)
                 qrcode.action_info.card.card_id = qrcode_info.card_id
             if(qrcode_info.openid)
