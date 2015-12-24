@@ -176,6 +176,59 @@ module.exports = {
                     maxLength: 3072,
                     required: true
                 }
+            },
+            meeting_ticket: {
+                meeting_detail: {
+                    type: 'string',
+                    maxLength: 3072,
+                    required: true
+                }
+            },
+            scenic_ticket: {
+                ticket_class: {
+                    type: 'string',
+                    maxLength: 24,
+                    required: true
+                }
+            },
+            movie_ticket: {
+                detail: {
+                    type: 'string',
+                    maxLength: 3072,
+                    required: true
+                }
+            },
+            boarding_pass: {
+                from: {
+                    type: 'string',
+                    maxLength: 54,
+                    required: true
+                },
+                to: {
+                    type: 'string',
+                    maxLength: 54,
+                    required: true
+                },
+                flight: {
+                    type: 'string',
+                    maxLength: 24,
+                    required: true
+                },
+                air_model: {
+                    type: 'string',
+                    maxLength: 24,
+                    required: true
+                },
+                departure_time: {
+                    type: 'string',
+                    maxLength: 128,
+                    required: true
+                },
+                landing_time: {
+                    type: 'string',
+                    maxLength: 128,
+                    required: true
+                }
             }
         },
         landing: {

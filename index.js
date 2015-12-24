@@ -150,7 +150,11 @@ module.exports = {
             "CASH": "CASH", // 现金
             "DISCOUNT": "DISCOUNT", // 折扣
             "GIFT": "GIFT",
-            "GENERAL_COUPON": "GENERAL_COUPON"// 通用
+            "GENERAL_COUPON": "GENERAL_COUPON",// 通用
+            "MEETING_TICKET": "MEETING_TICKET",// 会议门票
+            "SCENIC_TICKET": "SCENIC_TICKET",// 景区门票
+            "MOVIE_TICKET": "MOVIE_TICKET", // 电影票
+            "BOARDING_PASS": "BOARDING_PASS"// 飞机票
         },
         code_type: {
             "CODE_TYPE_TEXT": "CODE_TYPE_TEXT",//文本
@@ -192,75 +196,55 @@ module.exports = {
           throw new Error(JSON.stringify(error))
           return false
     },
-    build_coupon: function(type, base_info){
+    build_coupon: function(type, base_info, specific_info){
         var _self = this;
         var coupon = null;
-        if(type === 'GROUPON')
-            return function(deal_detail){
-                coupon = {
-                    card_type: 'GROUPON',
-                    groupon: {
-                        base_info: base_info,
-                        deal_detail: deal_detail
-                    }
-                }
-                if(_self.validate(coupon.groupon, 'groupon')){
-                    return coupon
-                }
-            }
-        if(type === 'CASH')
-            return function(least_cost, reduce_cost){
-                coupon = {
-                    card_type: 'CASH',
-                    cash: {
-                        base_info: base_info,
-                        least_cost: least_cost,
-                        reduce_cost: reduce_cost
-                    }
-                }
-                if(_self.validate(coupon.cash, 'cash')){
-                    return coupon
-                }
-            }
-        if(type === 'DISCOUNT')
-            return function(discount){
-                coupon = {
-                    card_type: 'DISCOUNT',
-                    discount: {
-                        base_info: base_info,
-                        discount: discount
-                    }
-                }
-                if(_self.validate(coupon.discount, 'discount')){
-                    return coupon
-                }
-            }
-        if(type === 'GIFT')
-            return function(gift){
-                coupon = {
-                    card_type: 'GIFT',
-                    gift: {
-                        base_info: base_info,
-                        gift: gift
-                    }
-                }
-                if(_self.validate(coupon.gift, 'gift')){
-                    return coupon
-                }
-            }
-        if(type === 'GENERAL_COUPON')
-            return function(default_detail){
-                coupon = {
-                    card_type: 'GENERAL_COUPON',
-                    general_coupon: {
-                        base_info: base_info,
-                        default_detail: default_detail
-                    }
-                }
-                if(_self.validate(coupon.general_coupon, 'general_coupon')){
-                    return coupon
-                }
-            }
+        var coupon_ns = type.toLowerCase()
+        coupon = {
+            card_type: type
+        }
+        coupon[coupon_ns] = {
+            base_info: base_info
+        }
+        if(type === 'GROUPON'){
+            coupon.groupon.deal_detail = specific_info.deal_detail;
+        }
+        if(type === 'CASH') {
+            coupon.cash.least_cost = specific_info.least_cost
+            coupon.cash.reduce_cost = specific_info.reduce_cost
+        }
+        if(type === 'DISCOUNT'){
+            coupon.discount.discount = specific_info.discount
+        }
+        if(type === 'GIFT'){
+            coupon.gift.gift = specific_info.gift
+        }
+        if(type === 'GENERAL_COUPON'){
+            coupon.general_coupon.default_detail = specific_info.default_detail
+        }
+        if(type === 'MEETING_TICKET'){
+            coupon.meeting_ticket.meeting_detail = specific_info.meeting_detail
+            coupon.meeting_ticket.map_url = specific_info.map_url
+        }
+        if(type === 'SCENIC_TICKET'){
+            coupon.scenic_ticket.ticket_class = specific_info.ticket_class
+            coupon.scenic_ticket.guide_url = specific_info.guide_url
+        }
+        if(type === 'MOVIE_TICKET'){
+            coupon.movie_ticket.detail = specific_info.detail
+        }
+        if(type === 'BOARDING_PASS'){
+            coupon.boarding_pass.from = specific_info.from
+            coupon.boarding_pass.to = specific_info.to
+            coupon.boarding_pass.flight = specific_info.flight
+            coupon.boarding_pass.departure_time = specific_info.departure_time
+            coupon.boarding_pass.landing_time = specific_info.landing_time
+            coupon.boarding_pass.air_model = specific_info.air_model
+        }
+        // 校验
+        if(_self.validate(coupon[coupon_ns], coupon_ns)){
+            return coupon
+        }
     },
     build_qrcode: function(qrcode_info){
         var qrcode = {
