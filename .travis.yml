@@ -9,7 +9,7 @@ evn:
 
 before_install:
   - npm install -g npm@$NPM_VERSION
+  - npm install -g mocha@2.3.4
   - npm --version
-  - npm install -g mocha
 
 script: "npm test"

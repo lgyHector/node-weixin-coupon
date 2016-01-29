@@ -10,7 +10,7 @@ var app = {
     token: process.env.APP_TOKEN
 };
 app.auth = {
-    accessToken: '2Ru2Hv9azJKfyZUfXwXL93JNXs9T9hTmvApNhRvh86pD_qTXivTsHBd18cvaOLfQGoxIsdK4SYraUkOp4EPRCTfttx6_3oYM-AGvL0TI9m4QFttrh3F8ZbsjnZGRgYR7FBYbACAWSP'
+    accessToken: 'D01ypAJsVg0T97rGZchD79_Bf0ple-f4gV-YQXpZieDSUalhvytStB7poCU-BjrGqLEKxSBA7db6HSwjIBZl6HaJxMBStK_IujQSAfTWygFkzx7hPClqUSTJIJuryr4NUOIhAHABVP'
 }
 var test_create_card = '';
 
