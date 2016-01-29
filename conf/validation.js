@@ -6,26 +6,6 @@ module.exports = {
                 maxLength: 24,
                 required: true
             },
-            sku: {
-                quantity: {
-                    type: 'int',
-                    required: true
-                }
-            },
-            data_info: {
-                type: {
-                    type: "string",
-                    required: true
-                },
-                begin_timestamp: {
-                    type: "int",
-                    required: true
-                },
-                end_timestamp: {
-                    type: "int",
-                    required: true
-                }
-            },
             base_info: {
                 logo_url: {
                     type: "url",
@@ -66,6 +46,32 @@ module.exports = {
                     type: "string",
                     maxLength: 3072,
                     required: true
+                },
+                data_info: {
+                    type: 'object',
+                    validate: {
+                        type: {
+                            type: "string",
+                            required: true
+                        },
+                        begin_timestamp: {
+                            type: "int",
+                            required: true
+                        },
+                        end_timestamp: {
+                            type: "int",
+                            required: true
+                        }
+                    }
+                },
+                sku: {
+                    type: 'object',
+                    validate: {
+                        quantity: {
+                            type: 'int',
+                            required: true
+                        }
+                    }
                 },
                 fixed_term: {
                     type: "int"
@@ -138,6 +144,42 @@ module.exports = {
                 },
                 can_give_friend: {
                     type: 'boolean'
+                }
+            },
+            advanced_info: {
+                type: 'object',
+                validate: {
+                    use_condition: {
+                        type: 'object',
+                        validate: {
+                            accept_category: {
+                                type: 'string',
+                                maxLength: 24
+                            },
+                            reject_category: {
+                                type: 'string',
+                                maxLength: 24,
+                                required: true
+                            },
+                            can_use_with_other_discount: {
+                                required: true
+                            }
+                        }
+                    },
+                    abstract: {
+                        type: 'object',
+                        validate: {
+                            abstract: {
+                                type: 'string'
+                            },
+                            icon_url_list: {
+                                required: true
+                            }
+                        }
+                    },
+                    share_friends: {
+                        required: true
+                    }
                 }
             },
             groupon: {

@@ -1,17 +1,23 @@
 {
   "name": "node-weixin-coupon",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Weixin Coupon functions for node",
   "author": {
-    "name": "",
-    "email": "lgyt34@hotmail.com",
-    "url": ""
+    "name": "lgyt34",
+    "email": "lgyt34@hotmail.com"
   },
-  "repository": "",
+  "main": "index.js",
+  "keywords": [
+    "node",
+    "weixin",
+    "coupon"
+  ],
+  "repository": "https://github.com/lgyhitler/node-weixin-coupon.git",
   "license": "MIT",
   "dependencies": {
+    "consto": "0.0.2",
     "lodash": "^3.10.1",
-    "node-form-validator": "^0.2.0",
+    "node-form-validator": "^0.3.0",
     "node-weixin-request": "^0.3.1",
     "node-weixin-settings": "0.0.6",
     "node-weixin-util": "^0.2.0",
@@ -19,7 +25,7 @@
     "xml": "^1.0.0",
     "xml2js": "^0.4.15"
   },
-  "devDependencies": {
-    "qunitjs": "^1.20.0"
+  "scripts": {
+    "test": "mocha test/test.js"
   }
 }
