@@ -25,7 +25,12 @@
     "xml": "^1.0.0",
     "xml2js": "^0.4.15"
   },
+  "devDependencies": {
+    "coveralls": "^2.11.6",
+    "istanbul": "^0.4.2",
+    "mocha": "^2.3.4"
+  },
   "scripts": {
-    "test": "mocha test/test.js"
+    "test": "istanbul cover _mocha -- -R spec"
   }
 }
