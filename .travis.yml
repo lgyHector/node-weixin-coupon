@@ -11,5 +11,4 @@ before_install:
   - npm install -g npm@$NPM_VERSION
   - npm --version
 
-script:
-  - true
+script: "npm test"
