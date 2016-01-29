@@ -1,4 +1,4 @@
-# [![Build Status](https://travis-ci.org/lgyhitler/node-weixin-coupon.svg?branch=master)](https://travis-ci.org/lgyhitler/node-weixin-coupon)
+# [![Build Status](https://travis-ci.org/lgyhitler/node-weixin-coupon.svg?branch=master)](https://travis-ci.org/lgyhitler/node-weixin-coupon) [![Coverage Status](https://coveralls.io/repos/github/lgyhitler/node-weixin-coupon/badge.svg?branch=master)](https://coveralls.io/github/lgyhitler/node-weixin-coupon?branch=master)
 # node-weixin-coupon
 此模块为微信卡券api接口开发，依赖[node-weixin](https://github.com/node-weixin)项目下的工具子项目
 
