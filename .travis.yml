@@ -4,3 +4,15 @@ node_js:
   - v4
   - '0.12'
   - '0.10'
+evn:
+  - APP_ID='wx491826e8c4ccbfd6'
+  - APP_SECRET='db0b1551ade11153ef35c52443d9d3f2'
+  - APP_TOKEN='klb'
+  - NPM_VERSION=3.5
+
+before_install:
+  - npm install -g npm@$NPM_VERSION
+  - npm --version
+
+script:
+  - true
