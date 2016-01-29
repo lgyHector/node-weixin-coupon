@@ -15,7 +15,7 @@
   "repository": "https://github.com/lgyhitler/node-weixin-coupon.git",
   "license": "MIT",
   "dependencies": {
-    "consto": "0.0.2",
+    "consto": "^0.0.1",
     "lodash": "^3.10.1",
     "node-form-validator": "^0.3.0",
     "node-weixin-request": "^0.3.1",
