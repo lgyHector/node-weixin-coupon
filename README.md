@@ -1,4 +1,5 @@
-# [![Build Status](https://travis-ci.org/lgyhitler/node-weixin-coupon.svg?branch=master)](https://travis-ci.org/lgyhitler/node-weixin-coupon) [![Coverage Status](https://coveralls.io/repos/github/lgyhitler/node-weixin-coupon/badge.svg?branch=master)](https://coveralls.io/github/lgyhitler/node-weixin-coupon?branch=master)
+#  [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Coveralls Status][coveralls-image]][coveralls-url] [![Dependency Status][daviddm-image]][daviddm-url]
+
 # node-weixin-coupon
 此模块为微信卡券api接口开发，依赖[node-weixin](https://github.com/node-weixin)项目下的工具子项目
 
@@ -43,3 +44,12 @@ weixinCoupon.coupon.create(app, coupon, function(err, resp){
 ## License
 
 MIT © [lgyhitler]
+
+[npm-image]: https://badge.fury.io/js/node-weixin-util.svg
+[npm-url]: https://badge.fury.io/js/node-weixin-coupon
+[travis-image]: https://travis-ci.org/lgyhitler/node-weixin-coupon.svg?branch=master
+[travis-url]: https://travis-ci.org/lgyhitler/node-weixin-coupon
+[coveralls-image]: https://coveralls.io/repos/github/lgyhitler/node-weixin-coupon/badge.svg?branch=master
+[coveralls-url]: https://coveralls.io/github/lgyhitler/node-weixin-coupon?branch=master
+[daviddm-image]: https://david-dm.org/lgyhitler/node-weixin-coupon.svg
+[daviddm-url]: https://david-dm.org/lgyhitler/node-weixin-coupon
