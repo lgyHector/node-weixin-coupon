@@ -10,7 +10,7 @@ var app = {
     token: process.env.APP_TOKEN
 };
 app.auth = {
-    accessToken: 'VFndQnULZPJkL69NP6tMb2n1uOmaYsV3Za-v1GKfP_5voSa4sLWYvhBVU2Snx7wZq4uahnOFbNyzmzZrMNTFdokdZEVw6kvJ6aQPO3C7jMcadrS3oFtYBBfGqW4l_XWZFOMjACAYHF'
+    accessToken: 'agOu6SCuc2FqyQEyfhVRxMxat3uaCdxmLZ4H0nRK_WSIyjAyYjnhw_To5NkwwlAcmHmvk8Se0BMUj720vauS12VMyD0ZPMZfBMfRixiimRvPFS5YjW9MTbnPso2EhGOAXCChAGASXX'
 }
 var test_create_card = '';
 
@@ -67,7 +67,7 @@ describe('node-weixin-coupon node module', function () {
      var coupon = nodeWeixinCoupon
          .build_coupon(types.card_type.CASH, test_data.base_info,  {least_cost: 10000, reduce_cost: 10000});
          nodeWeixinCoupon.coupon.create(app, coupon, function(err, resp){
-             console.log(resp)
+             //console.log(resp)
              assert.equal(true, !err);
              assert.equal(true, resp.errcode === 0);
              assert.equal(true, resp.errmsg === 'ok');
@@ -76,13 +76,9 @@ describe('node-weixin-coupon node module', function () {
          })
      })
     it('should build a single qrcode obj', function(done){
-        var data = {
-            "card_id": "pcg3RsiPTfgpgxcjecgHEMGZAX74",
-            "code": "231857122661"
-        }
         var qrcode = nodeWeixinCoupon.build_qrcode(test_data.qrcode_single_info);
         assert.equal(true, qrcode.action_name === 'QR_CARD');
-        assert.equal(true, qrcode.action_info.card.card_id === 'pcg3RsiPTfgpgxcjecgHEMGZAX74')
+        assert.equal(true, qrcode.action_info.card.card_id === test_data.qrcode_single_info.card_id)
         done()
     })
     it('should build a multiply qrcode obj', function(done){
@@ -100,12 +96,13 @@ describe('node-weixin-coupon node module', function () {
             scene: types.landing_scene.SCENE_ARTICLE,
             card_list: [
                 {
-                    card_id: 'pcg3RsiPTfgpgxcjecgHEMGZAX74',
+                    card_id: 'pcg3Rsh5wWKe6kCLULAIyBJE0-qU',
                     thumb_url: test_data.banner
                 }
             ]
         }
         nodeWeixinCoupon.coupon.landing_page(app, landing_info, function(err, resp){
+            //console.log(resp)
             assert.equal(true, !err);
             assert.equal(true, resp.errcode === 0)
             assert.equal(true, resp.errmsg === 'ok')
@@ -168,6 +165,7 @@ describe('node-weixin-coupon node module', function () {
     })
     it('should be able to get User cardlist', function(done){
         nodeWeixinCoupon.coupon.user_getcard_list(app, 'ocg3RskQSl1PtDC3KcNGpLKjVPL4', null, function(err, resp){
+            //console.log(resp)
             assert.equal(true, !err);
             assert.equal(true, resp.errcode === 0)
             assert.equal(true, resp.errmsg === 'ok')
