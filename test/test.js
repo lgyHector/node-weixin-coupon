@@ -10,22 +10,11 @@ var app = {
     token: process.env.APP_TOKEN
 };
 app.auth = {
-    accessToken: '6u8kKzVQjjjAA3TYwY3ekpECu8SPc6EEStOijaSz8e1mYoe6QbwLGXVJUi2nrMRCcXKa4OK49kISru5-BrYU-OO-T48jgrzBcTh9icgFwB9HsXjMXKPHpB_J1xeHFNhQJVTaAGANZX'
+    accessToken: 'ob7RDs_mT96nAr6XOL2jwx3VRqIxdU5PprNSzA1FmlvI5uJRZ3RLc5YH_QwYL88YfWe_UirAuR2omGBCHyttwLvfhlLOQt8j-bzlQyAtcBe3ozGCehLN53UjKoQGJTPSMKUeAJDUSC'
 }
 var test_create_card = '';
 
 describe('node-weixin-coupon node module', function () {
-
-    /*it('should be able to upload an image file', function(done){
-     nodeWeixinCoupon.coupon.uplogo(app, data_path, function(err, resp){
-     console.log(err)
-     console.log(resp)
-     assert.equal(true, !err);
-     assert.equal(true, resp.url !== '');
-     assert.equal(true, resp.errcode !== 40009);
-     done();
-     })
-     })*/
 
     it('should build a GROUPON coupon obj', function(done){
         var coupon = nodeWeixinCoupon
@@ -173,6 +162,16 @@ describe('node-weixin-coupon node module', function () {
             done();
         })
     })
+    it('should be able to batch get card list', function(done){
+        nodeWeixinCoupon.coupon.batch_get(app, 0, 5, [types.card_status.CARD_STATUS_VERIFY_OK,
+            types.card_status.CARD_STATUS_DISPATCH], function(err, resp){
+            assert.equal(true, resp.errcode === 0)
+            assert.equal(true, resp.errmsg === 'ok')
+            assert.equal(true, resp.total_num >= 0)
+            assert.equal(true, resp.card_id_list.length >= 0)
+            done();
+        })
+    });
     /*it('should consume a coupon', function(done){
         nodeWeixinCoupon.coupon.consume(app, null, '159107890887', function(err, resp){
             assert.equal(true, !err);
@@ -186,6 +185,16 @@ describe('node-weixin-coupon node module', function () {
             assert.equal(true, resp.errcode === 0)
             assert.equal(true, resp.errmsg === 'ok')
             done()
+        })
+    })*/
+    /*it('should be able to upload an image file', function (done) {
+        nodeWeixinCoupon.coupon.uplogo(app, 'test/logo_test.jpg', function (err, resp) {
+            console.log(err)
+            console.log(resp)
+            assert.equal(true, !err);
+            assert.equal(true, resp.url !== '');
+            assert.equal(true, resp.errcode !== 40009);
+            done();
         })
     })*/
 
