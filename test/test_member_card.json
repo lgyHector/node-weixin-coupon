@@ -1,0 +1,45 @@
+{
+  "background_pic_url": "",
+  "base_info": {
+    "logo_url": "http://mmbiz.qpic.cn/mmbiz/aYWDTHbouMjvCXPQl3bZ30vYBicQulT5n4SfdpCicEQ15ficjQNBlawPwLjaEOBkj3LibeQab5AZVnBbyGOic1AsEMw/0",
+    "brand_name": "快乐邦体验会员",
+    "code_type": "CODE_TYPE_TEXT",
+    "title": "快乐邦体验会员卡",
+    "color": "Color080",
+    "notice": "使用时向服务员出示此卡",
+    "service_phone": "020-88888888",
+    "description": "使用时向服务员出示此卡",
+    "date_info": {
+      "type": "DATE_TYPE_PERMANENT"
+    },
+    "sku": {
+      "quantity": 1000
+    },
+    "get_limit": 1,
+    "use_custom_code": false,
+    "can_give_friend": false,
+    "custom_url_name": "到店消费",
+    "custom_url": "https://klb.goodsfans.com/klbtiyan/user/wechat_card",
+    "custom_url_sub_title": "扫码付款",
+    "promotion_url_name": "微信商店",
+    "promotion_url": "https://klb.goodsfans.com/klbtiyan/shop",
+    "promotion_url_sub_title": "在线预订",
+    "need_push_on_view": true
+  },
+  "supply_bonus": true,
+  "bonus_url": "https://klb.goodsfans.com/klbtiyan/score",
+  "supply_balance": true,
+  "balance_url": "https://klb.goodsfans.com/klbtiyan/user/balance",
+  "prerogative": "会员特权：1、特权01 2、特权02",
+  "auto_activate": true,
+  "custom_field1": {
+    "name": "等级",
+    "url": "https://klb.goodsfans.com/klbtiyan/user/enable_card"
+  },
+  "activate_url": "http://www.qq.com",
+  "custom_cell1": {
+    "name": "门店列表",
+    "tips": "门店位置",
+    "url": "https://klb.goodsfans.com/klbtiyan/address/poi"
+  }
+}

@@ -3,18 +3,44 @@ var assert = require('assert');
 var nodeWeixinCoupon = require('../').coupon;
 var types = require('../lib/types');
 var test_data = require('./test_data.json');
+var settings = require('node-weixin-settings');
 
 var app = {
-    id: process.env.APP_ID,
+    id: 'wx538c7c07ffbfa175',//process.env.APP_ID,
     secret: process.env.APP_SECRET,
     token: process.env.APP_TOKEN
 };
 app.auth = {
-    accessToken: '4-M9oK5ZdtGqVyrOLPmZIKqpcWRTpBH8DTSf2icm1BrFQwdqSC49EWHZ_PjQi3IXwbagpCWZ7ixt8MYvCiv8oh94y1G4ovAVogKgJL5QIvEp2_O_3pyAPGCBDDQ_UrqWYZMhAIABCP'
+    accessToken: 'g_zJOqGLMFPGccG61XCreOZRGIpAd2TVznu5RACOmhpb7t3IjICcwPW57oZw0wQE8--xdXfsfN35nJJ-6lHWbKG_lcPzPuDeaVKd-vAWVgKDtIgsx_oV1yeuUv5NZKqfGFSiADAONA'
 }
+var accessToken = '-UbdOYFTH2E0WC5CB_DfoLKDg7EI1PuIMOt86u5V_emE34VqLviaR-7Wiau8H5gPwrrATdYhw9Jtg6RD1x3Py_Kp6FklC89ws9VKPIiZtLqAidYrGeGUaqt-3YhXgm5vRKNfAIDJCF';
 var test_create_card = '';
 
 describe('node-weixin-coupon node module', function () {
+
+    it('should create a member card ', function(done){
+        settings.set(app.id, 'auth', {accessToken: accessToken});
+        var data = require('./test_member_card.json')
+        nodeWeixinCoupon.membercard.create(settings, app, data, function(err, resp){
+            console.log(err, resp)
+            assert.equal(true, resp.errcode == 0)
+        })
+    })
+    it('should activate a member card', function(done){
+        var code = '988709537267';
+        settings.set(app.id, 'auth', {accessToken: accessToken});
+        nodeWeixinCoupon.membercard.activate(settings, app, {
+            init_bonus: 5500,
+            init_balance: 200,
+            membership_number: code,
+            code: code,
+            init_custom_field_value1: "金卡会员"
+        }, function(err, resp){
+            console.log(err, resp)
+            assert.equal(true, resp.errcode == 0)
+            done();
+        })
+    })
 
     it('should build a GROUPON coupon obj', function(done){
         var coupon = nodeWeixinCoupon
