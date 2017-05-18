@@ -24,6 +24,7 @@ describe('node-weixin-coupon node module', function () {
         nodeWeixinCoupon.membercard.create(settings, app, data, function(err, resp){
             console.log(err, resp)
             assert.equal(true, resp.errcode == 0)
+            done();
         })
     })
     it('should activate a member card', function(done){
@@ -40,6 +41,10 @@ describe('node-weixin-coupon node module', function () {
             assert.equal(true, resp.errcode == 0)
             done();
         })
+    })
+
+    it('should update an user member card info', function(done){
+        done();
     })
 
     it('should build a GROUPON coupon obj', function(done){
